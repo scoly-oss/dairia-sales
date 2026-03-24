@@ -192,7 +192,7 @@ export default function PropositionModal({ proposition, prospects, services, onS
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-medium mb-1" style={{ color: '#6b7280' }}>Statut</label>
-              <select value={form.status} onChange={(e) => setForm((f) => ({ ...f, status: e.target.value }))}
+              <select value={form.status} onChange={(e) => setForm((f) => ({ ...f, status: e.target.value as any }))}
                 className={inputCls} style={inputStyle}>
                 <option value="brouillon">Brouillon</option>
                 <option value="envoyee">Envoyée</option>
