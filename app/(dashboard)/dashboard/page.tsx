@@ -1,8 +1,9 @@
 import { createClient } from '@/lib/supabase/server'
 import Header from '@/components/layout/Header'
 import DashboardCharts from '@/components/dashboard/DashboardCharts'
+import VeilleWidget from '@/components/dashboard/VeilleWidget'
 import { formatCurrency, stageLabel } from '@/lib/utils'
-import type { Profile, Deal } from '@/lib/types'
+import type { Profile, Deal, VeilleAlerte } from '@/lib/types'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -55,6 +56,16 @@ export default async function DashboardPage() {
     : 0
 
   const top5 = allDeals.slice(0, 5)
+
+  // Veille widget
+  const { data: veilleAlertes } = await supabase
+    .from('veille_alertes')
+    .select('*')
+    .eq('archive', false)
+    .order('created_at', { ascending: false })
+    .limit(5)
+
+  const veilleNonLu = (veilleAlertes || []).filter((a) => !a.lu).length
 
   const stats = [
     {
@@ -171,6 +182,11 @@ export default async function DashboardPage() {
               </div>
             )}
           </div>
+        </div>
+
+        {/* Veille widget */}
+        <div className="mt-6">
+          <VeilleWidget alertes={(veilleAlertes || []) as VeilleAlerte[]} nonLuCount={veilleNonLu} />
         </div>
 
         {/* CA Annuel */}

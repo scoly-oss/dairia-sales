@@ -169,6 +169,50 @@ export interface EmailSent {
   template?: EmailTemplate
 }
 
+// Veille Stratégique
+export type VeilleType = 'concurrentielle' | 'marche' | 'reputation'
+export type VeilleCategorie = 'cabinet' | 'legaltech' | 'atmp' | 'opportunite' | 'mention' | 'avis' | 'presse'
+export type VeilleSentiment = 'positif' | 'neutre' | 'negatif'
+export type VeilleImportance = 'faible' | 'normale' | 'haute'
+export type VeilleConcurrentType = 'cabinet' | 'legaltech' | 'saas'
+export type VeilleFrequence = 'quotidienne' | 'hebdomadaire' | 'mensuelle'
+
+export interface VeilleAlerte {
+  id: string
+  type: VeilleType
+  categorie: VeilleCategorie
+  titre: string
+  resume: string | null
+  source_url: string | null
+  sentiment: VeilleSentiment | null
+  importance: VeilleImportance
+  prospect_id: string | null
+  lu: boolean
+  archive: boolean
+  created_at: string
+  prospect?: Prospect
+}
+
+export interface VeilleConcurrent {
+  id: string
+  nom: string
+  type: VeilleConcurrentType
+  secteur: string | null
+  site_web: string | null
+  notes: string | null
+  forces: string[]
+  faiblesses: string[]
+  created_at: string
+}
+
+export interface VeilleConfig {
+  id: string
+  mots_cles: string[]
+  sources: string[]
+  frequence: VeilleFrequence
+  actif: boolean
+}
+
 export interface DashboardStats {
   ca_previsionnel: number
   ca_realise_mois: number

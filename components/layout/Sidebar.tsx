@@ -13,6 +13,7 @@ import {
   Settings,
   LogOut,
   ChevronRight,
+  Eye,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
@@ -25,6 +26,7 @@ const navItems = [
   { href: '/relances', label: 'Relances', icon: Bell },
   { href: '/catalogue', label: 'Catalogue', icon: BookOpen },
   { href: '/emails', label: 'Emails', icon: Mail },
+  { href: '/veille', label: 'Veille', icon: Eye },
 ]
 
 export default function Sidebar() {
