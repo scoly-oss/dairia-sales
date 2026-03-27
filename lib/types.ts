@@ -213,6 +213,32 @@ export interface VeilleConfig {
   actif: boolean
 }
 
+// Intelligence IA
+export type IaProposalStatus = 'draft' | 'validated' | 'sent'
+
+export interface IaProposal {
+  id: string
+  deal_id: string
+  prospect_id: string
+  email_subject: string
+  email_body: string
+  key_arguments: string[]
+  urgency_reason: string | null
+  risk_if_no_action: string | null
+  status: IaProposalStatus
+  modified_email_subject: string | null
+  modified_email_body: string | null
+  created_by: string | null
+  validated_by: string | null
+  validated_at: string | null
+  sent_at: string | null
+  created_at: string
+  updated_at: string
+  // joined
+  deal?: Deal
+  prospect?: Prospect
+}
+
 export interface DashboardStats {
   ca_previsionnel: number
   ca_realise_mois: number

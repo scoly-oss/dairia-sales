@@ -1,11 +1,12 @@
 'use client'
 
 import { Draggable } from '@hello-pangea/dnd'
-import { MoreVertical, Pencil, Trash2, Building2, User } from 'lucide-react'
+import { MoreVertical, Pencil, Trash2, Building2, Sparkles } from 'lucide-react'
 import { useState } from 'react'
-import { formatCurrency, formatDate, scoreBadgeClass, scoreLabel, sourceLabel } from '@/lib/utils'
-import type { Deal } from '@/lib/types'
+import { formatCurrency, formatDate, scoreBadgeClass, sourceLabel } from '@/lib/utils'
+import type { Deal, IaProposal } from '@/lib/types'
 import { createClient } from '@/lib/supabase/client'
+import ProposalGenerator from '@/components/intelligence/ProposalGenerator'
 
 interface DealCardProps {
   deal: Deal
@@ -16,6 +17,7 @@ interface DealCardProps {
 
 export default function DealCard({ deal, index, onEdit, onDelete }: DealCardProps) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [showAI, setShowAI] = useState(false)
 
   async function handleDelete() {
     if (!confirm('Supprimer ce deal ?')) return
@@ -28,6 +30,7 @@ export default function DealCard({ deal, index, onEdit, onDelete }: DealCardProp
   const prospect = (deal as Deal & { prospect?: { company_name: string; score: string } }).prospect
 
   return (
+    <>
     <Draggable draggableId={deal.id} index={index}>
       {(provided, snapshot) => (
         <div
@@ -75,6 +78,13 @@ export default function DealCard({ deal, index, onEdit, onDelete }: DealCardProp
                       style={{ color: '#1e2d3d' }}
                     >
                       <Pencil size={13} /> Modifier
+                    </button>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); setShowAI(true); setMenuOpen(false) }}
+                      className="flex items-center gap-2 w-full px-3 py-2 text-sm text-left"
+                      style={{ color: '#e8842c' }}
+                    >
+                      <Sparkles size={13} /> Générer proposition IA
                     </button>
                     <button
                       onClick={(e) => { e.stopPropagation(); handleDelete() }}
@@ -133,5 +143,13 @@ export default function DealCard({ deal, index, onEdit, onDelete }: DealCardProp
         </div>
       )}
     </Draggable>
+    {showAI && (
+      <ProposalGenerator
+        deal={deal}
+        onClose={() => setShowAI(false)}
+        onValidated={(_proposal: IaProposal) => setShowAI(false)}
+      />
+    )}
+  </>
   )
 }
