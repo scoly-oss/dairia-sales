@@ -213,6 +213,81 @@ export interface VeilleConfig {
   actif: boolean
 }
 
+// Intelligence Client
+export type EffectifTranche = '-11' | '11-50' | '50-250' | '250+'
+export type OpportuniteType = 'service_manquant' | 'saisonnalite' | 'actu_juridique'
+export type OpportuniteStatut = 'nouvelle' | 'en_cours' | 'proposee' | 'gagnee' | 'perdue' | 'ignoree'
+export type ActuSourceType = 'decret' | 'jurisprudence' | 'reforme' | 'ccn' | 'autre'
+export type PropositionIntelligentResultat = 'en_attente' | 'ouvert' | 'interesse' | 'signe' | 'refuse' | 'sans_reponse'
+
+export interface ClientIntelligence {
+  id: string
+  prospect_id: string
+  secteur: string | null
+  code_naf: string | null
+  idcc: string | null
+  idcc_libelle: string | null
+  effectif_tranche: EffectifTranche
+  services_souscrits: string[]
+  services_potentiels: string[]
+  score_opportunite: number
+  notes_internes: string | null
+  updated_at: string
+  prospect?: Prospect
+}
+
+export interface OpportuniteIA {
+  id: string
+  prospect_id: string
+  type: OpportuniteType
+  source: string | null
+  titre: string
+  description: string | null
+  service_propose: string
+  ca_estime: number
+  statut: OpportuniteStatut
+  email_genere: string | null
+  proposition_generee: string | null
+  created_at: string
+  updated_at: string
+  prospect?: Prospect
+}
+
+export interface ActuImpact {
+  id: string
+  source_type: ActuSourceType
+  source_ref: string | null
+  titre: string
+  resume: string | null
+  clients_concernes_ids: string[]
+  services_concernes: string[]
+  date_publication: string | null
+  created_at: string
+}
+
+export interface PropositionIntelligente {
+  id: string
+  opportunite_id: string
+  prospect_id: string
+  contact_id: string | null
+  canal: 'email' | 'telephone' | 'courrier' | 'autre'
+  date_envoi: string | null
+  date_ouverture: string | null
+  resultat: PropositionIntelligentResultat
+  created_at: string
+  opportunite?: OpportuniteIA
+  prospect?: Prospect
+}
+
+export interface IntelligenceDashboardStats {
+  total_opportunites: number
+  ca_potentiel: number
+  clients_avec_opportunites: number
+  nouvelles_cette_semaine: number
+  taux_conversion: number
+  opportunites_par_statut: Record<string, number>
+}
+
 export interface DashboardStats {
   ca_previsionnel: number
   ca_realise_mois: number
