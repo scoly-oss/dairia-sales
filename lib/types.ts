@@ -213,6 +213,92 @@ export interface VeilleConfig {
   actif: boolean
 }
 
+// Intelligence Client
+export type EffectifTranche = 'moins_11' | '11_50' | '50_250' | '250_plus'
+export type OpportuniteStatut = 'detectee' | 'en_cours' | 'envoyee' | 'convertie' | 'ignoree'
+export type OpportuniteSource = 'service_manquant' | 'saisonnalite' | 'actu_juridique'
+export type ServiceIntelligence =
+  | 'audit_rh'
+  | 'formation_managers'
+  | 'audit_rgpd'
+  | 'conseil_contrats'
+  | 'nao'
+  | 'bilan_social'
+  | 'entretiens_pro'
+  | 'rentree_sociale'
+  | 'info_collective'
+  | 'securisation_contrats'
+  | 'contentieux'
+
+export interface ClientIntelligence {
+  id: string
+  prospect_id: string
+  secteur: string | null
+  code_naf: string | null
+  idcc: string | null
+  effectif_tranche: EffectifTranche | null
+  services_souscrits: ServiceIntelligence[]
+  score_opportunite: number
+  updated_at: string
+  // joined
+  prospect?: Prospect
+  opportunites?: OpportuniteIA[]
+}
+
+export interface OpportuniteIA {
+  id: string
+  prospect_id: string
+  type: OpportuniteSource
+  source: string | null
+  titre: string
+  description: string
+  service_propose: ServiceIntelligence
+  ca_estime: number
+  statut: OpportuniteStatut
+  email_genere: string | null
+  proposition_generee: string | null
+  created_at: string
+  // joined
+  prospect?: Prospect
+}
+
+export interface ActuImpact {
+  id: string
+  source_type: 'decret' | 'jurisprudence' | 'reforme' | 'ccn' | 'autre'
+  source_ref: string | null
+  titre: string
+  resume: string
+  clients_concernes_ids: string[]
+  services_concernes: ServiceIntelligence[]
+  created_at: string
+}
+
+export interface PropositionIntelligente {
+  id: string
+  opportunite_id: string
+  prospect_id: string
+  contact_id: string | null
+  canal: 'email' | 'telephone' | 'courrier' | 'rdv'
+  date_envoi: string | null
+  date_ouverture: string | null
+  resultat: 'interesse' | 'non_interesse' | 'sans_reponse' | 'converti' | null
+  created_at: string
+  // joined
+  opportunite?: OpportuniteIA
+  prospect?: Prospect
+}
+
+export interface IntelligenceDashboardStats {
+  total_clients: number
+  clients_avec_opportunites: number
+  opportunites_semaine: number
+  ca_potentiel: number
+  taux_conversion: number
+  top_clients: Array<ClientIntelligence & { opportunites_count: number }>
+  alertes_actus: ActuImpact[]
+  opportunites_recentes: OpportuniteIA[]
+}
+
 export interface DashboardStats {
   ca_previsionnel: number
   ca_realise_mois: number
