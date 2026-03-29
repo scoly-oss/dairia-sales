@@ -14,6 +14,7 @@ import {
   LogOut,
   ChevronRight,
   Eye,
+  X,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
@@ -29,7 +30,12 @@ const navItems = [
   { href: '/veille', label: 'Veille', icon: Eye },
 ]
 
-export default function Sidebar() {
+interface SidebarProps {
+  mobileOpen?: boolean
+  onClose?: () => void
+}
+
+export default function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
   const pathname = usePathname()
   const router = useRouter()
 
@@ -42,7 +48,9 @@ export default function Sidebar() {
 
   return (
     <aside
-      className="w-60 flex flex-col h-full fixed left-0 top-0 z-40"
+      className={`w-60 flex flex-col h-full fixed left-0 top-0 z-40 transition-transform duration-200 ${
+        mobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+      }`}
       style={{
         backgroundColor: '#1e2d3d',
         borderRight: '1px solid rgba(255,255,255,0.08)',
@@ -59,12 +67,20 @@ export default function Sidebar() {
         >
           D
         </div>
-        <div>
+        <div className="flex-1">
           <div className="text-white font-semibold text-sm">DAIRIA Sales</div>
           <div className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>
             CRM Avocats
           </div>
         </div>
+        <button
+          onClick={onClose}
+          className="md:hidden text-white flex-shrink-0"
+          style={{ opacity: 0.5 }}
+          aria-label="Fermer le menu"
+        >
+          <X size={16} />
+        </button>
       </div>
 
       {/* Nav */}
