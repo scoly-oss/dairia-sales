@@ -46,12 +46,12 @@ export default async function DashboardPage() {
   const caRealiseQ = allWon.filter((d) => d.closed_at >= startOfQuarter).reduce((sum, d) => sum + d.amount, 0)
   const caRealiseYear = allWon.filter((d) => d.closed_at >= startOfYear).reduce((sum, d) => sum + d.amount, 0)
 
-  const { data: prospectCount } = await supabase.from('prospects').select('id', { count: 'exact', head: true })
-  const { data: wonCount } = await supabase.from('deals').select('id', { count: 'exact', head: true }).eq('stage', 'gagne')
-  const { data: totalDeals } = await supabase.from('deals').select('id', { count: 'exact', head: true })
+  const { count: prospectCount } = await supabase.from('prospects').select('*', { count: 'exact', head: true })
+  const { count: wonCount } = await supabase.from('deals').select('*', { count: 'exact', head: true }).eq('stage', 'gagne')
+  const { count: totalDeals } = await supabase.from('deals').select('*', { count: 'exact', head: true })
 
-  const tauxConversion = totalDeals?.length
-    ? Math.round(((wonCount?.length || 0) / (totalDeals?.length || 1)) * 100)
+  const tauxConversion = totalDeals
+    ? Math.round(((wonCount || 0) / (totalDeals || 1)) * 100)
     : 0
 
   const top5 = allDeals.slice(0, 5)
@@ -94,7 +94,7 @@ export default async function DashboardPage() {
     {
       label: 'Taux de conversion',
       value: `${tauxConversion}%`,
-      sub: `${wonCount?.length || 0} deals gagnés`,
+      sub: `${wonCount || 0} deals gagnés`,
       color: '#8b5cf6',
       bg: 'rgba(139,92,246,0.08)',
       dot: '#8b5cf6',
@@ -225,7 +225,7 @@ export default async function DashboardPage() {
           <div className="text-right">
             <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>Total prospects</p>
             <p className="text-2xl font-bold" style={{ color: '#e8842c' }}>
-              {prospectCount?.length || 0}
+              {prospectCount || 0}
             </p>
           </div>
         </div>
