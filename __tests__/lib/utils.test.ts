@@ -14,6 +14,7 @@ import {
   truncate,
   isValidEmail,
   sanitizeInput,
+  sanitizeUrl,
   getInitials,
   sourceLabel,
   generatePassword,
@@ -256,6 +257,40 @@ describe('sourceLabel', () => {
 
   it('returns source as-is for unknown', () => {
     expect(sourceLabel('unknown_source')).toBe('unknown_source')
+  })
+})
+
+describe('sanitizeUrl', () => {
+  it('allows valid http URLs', () => {
+    expect(sanitizeUrl('http://example.com')).toBe('http://example.com')
+  })
+
+  it('allows valid https URLs', () => {
+    expect(sanitizeUrl('https://example.com/path?q=1')).toBe('https://example.com/path?q=1')
+  })
+
+  it('blocks javascript: URLs (XSS prevention)', () => {
+    expect(sanitizeUrl('javascript:alert(1)')).toBeNull()
+    expect(sanitizeUrl('javascript:void(0)')).toBeNull()
+  })
+
+  it('blocks data: URLs', () => {
+    expect(sanitizeUrl('data:text/html,<script>alert(1)</script>')).toBeNull()
+  })
+
+  it('blocks vbscript: URLs', () => {
+    expect(sanitizeUrl('vbscript:msgbox(1)')).toBeNull()
+  })
+
+  it('returns null for null/undefined/empty', () => {
+    expect(sanitizeUrl(null)).toBeNull()
+    expect(sanitizeUrl(undefined)).toBeNull()
+    expect(sanitizeUrl('')).toBeNull()
+  })
+
+  it('returns null for invalid URLs', () => {
+    expect(sanitizeUrl('not a url')).toBeNull()
+    expect(sanitizeUrl('://missing-scheme')).toBeNull()
   })
 })
 

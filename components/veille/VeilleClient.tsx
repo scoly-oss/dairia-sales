@@ -19,7 +19,7 @@ import {
   Shield,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
-import { formatDate } from '@/lib/utils'
+import { formatDate, sanitizeUrl } from '@/lib/utils'
 import type { VeilleAlerte, VeilleConcurrent, VeilleConfig, VeilleType, VeilleImportance } from '@/lib/types'
 
 interface VeilleClientProps {
@@ -501,11 +501,11 @@ function AlerteDetailModal({ alerte, onClose, onArchive, onCreateProspect, creat
               </span>
             </div>
           )}
-          {alerte.source_url && (
+          {alerte.source_url && sanitizeUrl(alerte.source_url) && (
             <div className="flex items-center gap-2 text-xs">
               <span className="font-medium" style={{ color: '#1e2d3d' }}>Source :</span>
               <a
-                href={alerte.source_url}
+                href={sanitizeUrl(alerte.source_url)!}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1 hover:underline"
@@ -613,9 +613,9 @@ function ConcurrentCard({ concurrent, onSelect }: ConcurrentCardProps) {
         </div>
       )}
 
-      {concurrent.site_web && (
+      {concurrent.site_web && sanitizeUrl(concurrent.site_web) && (
         <a
-          href={concurrent.site_web}
+          href={sanitizeUrl(concurrent.site_web)!}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-1 text-xs hover:underline mt-2"
@@ -714,9 +714,9 @@ function ConcurrentDetailModal({ concurrent, onClose }: ConcurrentDetailModalPro
           )}
         </div>
 
-        {concurrent.site_web && (
+        {concurrent.site_web && sanitizeUrl(concurrent.site_web) && (
           <a
-            href={concurrent.site_web}
+            href={sanitizeUrl(concurrent.site_web)!}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm hover:underline"

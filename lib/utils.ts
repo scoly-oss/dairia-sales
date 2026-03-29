@@ -141,11 +141,28 @@ export function truncate(str: string, maxLength = 50): string {
 
 export function generatePassword(): string {
   const chars = 'ABCDEFGHJKMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789!@#$%'
+  const array = new Uint32Array(16)
+  crypto.getRandomValues(array)
   let password = ''
   for (let i = 0; i < 16; i++) {
-    password += chars.charAt(Math.floor(Math.random() * chars.length))
+    password += chars.charAt(array[i] % chars.length)
   }
   return password
+}
+
+/**
+ * Validates a URL and returns it only if it uses http: or https: scheme.
+ * Prevents XSS via javascript: or data: URLs used as href values.
+ */
+export function sanitizeUrl(url: string | null | undefined): string | null {
+  if (!url) return null
+  try {
+    const parsed = new URL(url)
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return null
+    return url
+  } catch {
+    return null
+  }
 }
 
 export function isValidEmail(email: string): boolean {
