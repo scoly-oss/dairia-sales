@@ -9,7 +9,7 @@ import {
 import { createClient } from '@/lib/supabase/client'
 import {
   scoreBadgeClass, scoreLabel, formatDate, formatDateRelative,
-  formatCurrency, stageLabel, stageColor
+  formatCurrency, stageLabel, stageColor, sanitizeUrl
 } from '@/lib/utils'
 import type { Prospect, Contact, Interaction, Deal, Profile } from '@/lib/types'
 
@@ -165,7 +165,7 @@ export default function ProspectDetail({ prospect: initial, currentUser, profile
           {[
             { icon: Building2, label: 'Entreprise', value: prospect.company_name },
             { icon: Hash, label: 'SIREN', value: prospect.siren },
-            { icon: Globe, label: 'Site web', value: prospect.website, isLink: true },
+            { icon: Globe, label: 'Site web', value: sanitizeUrl(prospect.website), isLink: true },
             { icon: MapPin, label: 'Adresse', value: prospect.address },
           ].map(({ icon: Icon, label, value, isLink }) => (
             <div
