@@ -92,8 +92,12 @@ export default function RegisterPage() {
         </div>
 
         <div
-          className="rounded-2xl p-8 shadow-sm"
-          style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3' }}
+          className="rounded-[14px] p-8"
+          style={{
+            backgroundColor: '#ffffff',
+            border: '1px solid #e5e5e3',
+            boxShadow: '0 4px 24px rgba(30,45,61,0.08)',
+          }}
         >
           <h1 className="text-xl font-semibold mb-6" style={{ color: '#1e2d3d' }}>
             Inscription

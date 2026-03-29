@@ -90,7 +90,7 @@ export default function TaskModal({ task, prospects, profiles, currentUser, onSa
       onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
     >
       <div
-        className="rounded-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto"
+        className="rounded-[14px] p-6 w-full max-w-md max-h-[90vh] overflow-y-auto"
         style={{ backgroundColor: '#ffffff' }}
       >
         <div className="flex items-center justify-between mb-5">

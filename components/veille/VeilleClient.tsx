@@ -269,8 +269,8 @@ export default function VeilleClient({ initialAlertes, initialConcurrents, initi
           <div className="space-y-3 max-w-4xl">
             {filteredAlertes.length === 0 ? (
               <div
-                className="rounded-xl p-12 text-center"
-                style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3' }}
+                className="rounded-[14px] p-12 text-center"
+                style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3', boxShadow: '0 1px 4px rgba(30,45,61,0.06)' }}
               >
                 <Eye size={32} className="mx-auto mb-3" style={{ color: '#e5e5e3' }} />
                 <p className="text-sm font-medium" style={{ color: '#6b7280' }}>
@@ -347,11 +347,12 @@ function AlerteCard({ alerte, onOpen, onArchive, onCreateProspect, creatingProsp
 
   return (
     <div
-      className="rounded-xl p-4 cursor-pointer transition-all hover:shadow-md"
+      className="rounded-[14px] p-4 cursor-pointer transition-all hover:shadow-md"
       style={{
         backgroundColor: '#ffffff',
         border: `1px solid ${alerte.lu ? '#e5e5e3' : '#e8842c'}`,
         borderLeft: `4px solid ${typeColors.text}`,
+        boxShadow: '0 1px 4px rgba(30,45,61,0.06)',
         opacity: alerte.lu ? 0.85 : 1,
       }}
       onClick={() => onOpen(alerte)}
@@ -453,7 +454,7 @@ function AlerteDetailModal({ alerte, onClose, onArchive, onCreateProspect, creat
       onClick={onClose}
     >
       <div
-        className="w-full max-w-lg rounded-2xl p-6"
+        className="w-full max-w-lg rounded-[14px] p-6"
         style={{ backgroundColor: '#ffffff', maxHeight: '90vh', overflowY: 'auto' }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -563,8 +564,8 @@ function ConcurrentCard({ concurrent, onSelect }: ConcurrentCardProps) {
 
   return (
     <div
-      className="rounded-xl p-4 cursor-pointer transition-all hover:shadow-md"
-      style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3' }}
+      className="rounded-[14px] p-4 cursor-pointer transition-all hover:shadow-md"
+      style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3', boxShadow: '0 1px 4px rgba(30,45,61,0.06)' }}
       onClick={() => onSelect(concurrent)}
     >
       <div className="flex items-start gap-3 mb-3">
@@ -648,7 +649,7 @@ function ConcurrentDetailModal({ concurrent, onClose }: ConcurrentDetailModalPro
       onClick={onClose}
     >
       <div
-        className="w-full max-w-lg rounded-2xl p-6"
+        className="w-full max-w-lg rounded-[14px] p-6"
         style={{ backgroundColor: '#ffffff', maxHeight: '90vh', overflowY: 'auto' }}
         onClick={(e) => e.stopPropagation()}
       >

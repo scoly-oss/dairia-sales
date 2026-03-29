@@ -26,7 +26,7 @@ export default function KanbanColumn({
 
   return (
     <div
-      className="flex flex-col rounded-xl"
+      className="flex flex-col rounded-[14px]"
       style={{
         width: '280px',
         minWidth: '280px',
@@ -36,7 +36,7 @@ export default function KanbanColumn({
     >
       {/* Column header */}
       <div
-        className="px-4 py-3 rounded-t-xl"
+        className="px-4 py-3 rounded-t-[14px]"
         style={{ borderBottom: '2px solid ' + color }}
       >
         <div className="flex items-center justify-between">

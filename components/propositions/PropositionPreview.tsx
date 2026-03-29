@@ -22,7 +22,7 @@ export default function PropositionPreview({ proposition, onClose }: Props) {
       style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}
     >
       <div
-        className="rounded-2xl w-full max-w-2xl max-h-[95vh] overflow-y-auto no-print"
+        className="rounded-[14px] w-full max-w-2xl max-h-[95vh] overflow-y-auto no-print"
         style={{ backgroundColor: '#ffffff' }}
       >
         {/* Toolbar */}

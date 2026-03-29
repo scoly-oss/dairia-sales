@@ -178,8 +178,8 @@ export default function ParametresClient({ currentUser, allProfiles, prospects }
               {profiles.map((p) => (
                 <div
                   key={p.id}
-                  className="flex items-center gap-3 p-4 rounded-xl"
-                  style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3' }}
+                  className="flex items-center gap-3 p-4 rounded-[14px]"
+                  style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3', boxShadow: '0 1px 4px rgba(30,45,61,0.06)' }}
                 >
                   <div
                     className="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-semibold"
@@ -219,8 +219,8 @@ export default function ParametresClient({ currentUser, allProfiles, prospects }
         {tab === 'Import/Export' && (
           <div className="max-w-lg space-y-6">
             <div
-              className="p-6 rounded-xl"
-              style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3' }}
+              className="p-6 rounded-[14px]"
+              style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3', boxShadow: '0 1px 4px rgba(30,45,61,0.06)' }}
             >
               <h3 className="text-sm font-semibold mb-1" style={{ color: '#1e2d3d' }}>
                 Exporter les prospects
@@ -238,8 +238,8 @@ export default function ParametresClient({ currentUser, allProfiles, prospects }
             </div>
 
             <div
-              className="p-6 rounded-xl"
-              style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3' }}
+              className="p-6 rounded-[14px]"
+              style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3', boxShadow: '0 1px 4px rgba(30,45,61,0.06)' }}
             >
               <h3 className="text-sm font-semibold mb-1" style={{ color: '#1e2d3d' }}>
                 Importer des prospects

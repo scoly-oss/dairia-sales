@@ -34,13 +34,13 @@ export default function DealCard({ deal, index, onEdit, onDelete }: DealCardProp
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className="rounded-xl p-3.5 relative"
+          className="rounded-[14px] p-3.5 relative"
           style={{
             backgroundColor: '#ffffff',
             border: '1px solid #e5e5e3',
             boxShadow: snapshot.isDragging
-              ? '0 8px 24px rgba(0,0,0,0.12)'
-              : '0 1px 3px rgba(0,0,0,0.04)',
+              ? '0 8px 24px rgba(30,45,61,0.16)'
+              : '0 1px 4px rgba(30,45,61,0.06)',
             transform: snapshot.isDragging ? 'rotate(1.5deg)' : 'none',
             transition: snapshot.isDragging ? 'none' : 'box-shadow 0.15s ease',
             cursor: 'grab',

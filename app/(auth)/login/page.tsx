@@ -66,8 +66,12 @@ export default function LoginPage() {
 
         {/* Card */}
         <div
-          className="rounded-2xl p-8 shadow-sm"
-          style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3' }}
+          className="rounded-[14px] p-8"
+          style={{
+            backgroundColor: '#ffffff',
+            border: '1px solid #e5e5e3',
+            boxShadow: '0 4px 24px rgba(30,45,61,0.08)',
+          }}
         >
           <h1
             className="text-xl font-semibold mb-6"
