@@ -105,8 +105,8 @@ export default function DashboardCharts() {
   if (loading) {
     return (
       <div
-        className="rounded-xl p-5 flex items-center justify-center h-64"
-        style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3' }}
+        className="rounded-[14px] p-5 flex items-center justify-center h-64"
+        style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3', boxShadow: '0 1px 4px rgba(30,45,61,0.06)' }}
       >
         <div className="text-sm" style={{ color: '#6b7280' }}>Chargement des graphiques...</div>
       </div>
@@ -117,8 +117,8 @@ export default function DashboardCharts() {
     <div className="space-y-4">
       {/* CA Evolution */}
       <div
-        className="rounded-xl p-5"
-        style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3' }}
+        className="rounded-[14px] p-5"
+        style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3', boxShadow: '0 1px 4px rgba(30,45,61,0.06)' }}
       >
         <h2 className="font-semibold text-sm mb-4" style={{ color: '#1e2d3d' }}>
           Évolution CA (12 mois)
@@ -147,8 +147,8 @@ export default function DashboardCharts() {
       {/* Pipeline funnel + Sources */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div
-          className="rounded-xl p-5"
-          style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3' }}
+          className="rounded-[14px] p-5"
+          style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3', boxShadow: '0 1px 4px rgba(30,45,61,0.06)' }}
         >
           <h2 className="font-semibold text-sm mb-4" style={{ color: '#1e2d3d' }}>
             Pipeline — deals par étape
@@ -165,8 +165,8 @@ export default function DashboardCharts() {
         </div>
 
         <div
-          className="rounded-xl p-5"
-          style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3' }}
+          className="rounded-[14px] p-5"
+          style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3', boxShadow: '0 1px 4px rgba(30,45,61,0.06)' }}
         >
           <h2 className="font-semibold text-sm mb-4" style={{ color: '#1e2d3d' }}>
             Répartition par source

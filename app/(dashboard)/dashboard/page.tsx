@@ -42,7 +42,6 @@ export default async function DashboardPage() {
   const allWon = wonDeals || []
 
   const caPrevisionnel = allDeals.reduce((sum, d) => sum + (d.amount * d.probability) / 100, 0)
-  const caRealise = allWon.filter((d) => d.closed_at).reduce((sum, d) => sum + d.amount, 0)
   const caRealiseMonth = allWon.filter((d) => d.closed_at >= startOfMonth).reduce((sum, d) => sum + d.amount, 0)
   const caRealiseQ = allWon.filter((d) => d.closed_at >= startOfQuarter).reduce((sum, d) => sum + d.amount, 0)
   const caRealiseYear = allWon.filter((d) => d.closed_at >= startOfYear).reduce((sum, d) => sum + d.amount, 0)
@@ -71,66 +70,83 @@ export default async function DashboardPage() {
     {
       label: 'CA Prévisionnel',
       value: formatCurrency(caPrevisionnel),
-      sub: 'deals en cours pondérés',
+      sub: 'deals pondérés',
       color: '#e8842c',
-      bg: '#fff7ed',
+      bg: 'rgba(232,132,44,0.08)',
+      dot: '#e8842c',
     },
     {
       label: 'CA Réalisé (mois)',
       value: formatCurrency(caRealiseMonth),
       sub: 'mois en cours',
       color: '#10b981',
-      bg: '#ecfdf5',
+      bg: 'rgba(16,185,129,0.08)',
+      dot: '#10b981',
     },
     {
-      label: 'CA Réalisé (trimestre)',
+      label: 'CA Réalisé (trim.)',
       value: formatCurrency(caRealiseQ),
       sub: 'trimestre en cours',
       color: '#3b82f6',
-      bg: '#eff6ff',
+      bg: 'rgba(59,130,246,0.08)',
+      dot: '#3b82f6',
     },
     {
       label: 'Taux de conversion',
       value: `${tauxConversion}%`,
       sub: `${wonCount?.length || 0} deals gagnés`,
       color: '#8b5cf6',
-      bg: '#f5f3ff',
+      bg: 'rgba(139,92,246,0.08)',
+      dot: '#8b5cf6',
     },
     {
       label: 'Deals actifs',
       value: `${allDeals.length}`,
       sub: 'pipeline en cours',
       color: '#f59e0b',
-      bg: '#fffbeb',
+      bg: 'rgba(245,158,11,0.08)',
+      dot: '#f59e0b',
     },
     {
       label: 'Nouveaux prospects',
       value: `${newProspects?.length || 0}`,
       sub: '7 derniers jours',
       color: '#ec4899',
-      bg: '#fdf2f8',
+      bg: 'rgba(236,72,153,0.08)',
+      dot: '#ec4899',
     },
   ]
 
   return (
     <div className="flex flex-col h-full">
       <Header profile={profile as Profile} title="Dashboard" />
-      <div className="flex-1 p-6 overflow-y-auto">
+      <div className="flex-1 p-4 sm:p-6 overflow-y-auto">
+
         {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-4 mb-6">
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="rounded-xl p-4"
-              style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3' }}
+              className="rounded-[14px] p-4"
+              style={{
+                backgroundColor: '#ffffff',
+                border: '1px solid #e5e5e3',
+                boxShadow: '0 1px 4px rgba(30,45,61,0.06)',
+              }}
             >
-              <p className="text-xs font-medium mb-1" style={{ color: '#6b7280' }}>
-                {stat.label}
-              </p>
-              <p className="text-2xl font-bold" style={{ color: stat.color }}>
+              <div className="flex items-center gap-1.5 mb-2">
+                <span
+                  className="w-2 h-2 rounded-full flex-shrink-0"
+                  style={{ backgroundColor: stat.dot }}
+                />
+                <p className="text-xs font-medium leading-tight" style={{ color: '#6b7280' }}>
+                  {stat.label}
+                </p>
+              </div>
+              <p className="text-xl sm:text-2xl font-bold leading-none" style={{ color: stat.color }}>
                 {stat.value}
               </p>
-              <p className="text-xs mt-0.5" style={{ color: '#6b7280' }}>
+              <p className="text-xs mt-1.5" style={{ color: '#9ca3af' }}>
                 {stat.sub}
               </p>
             </div>
@@ -138,15 +154,19 @@ export default async function DashboardPage() {
         </div>
 
         {/* Charts + Top deals */}
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6">
           <div className="xl:col-span-2">
             <DashboardCharts />
           </div>
 
           {/* Top 5 deals */}
           <div
-            className="rounded-xl p-5"
-            style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3' }}
+            className="rounded-[14px] p-5"
+            style={{
+              backgroundColor: '#ffffff',
+              border: '1px solid #e5e5e3',
+              boxShadow: '0 1px 4px rgba(30,45,61,0.06)',
+            }}
           >
             <h2 className="font-semibold text-sm mb-4" style={{ color: '#1e2d3d' }}>
               Top 5 deals en cours
@@ -185,18 +205,20 @@ export default async function DashboardPage() {
         </div>
 
         {/* Veille widget */}
-        <div className="mt-6">
+        <div className="mt-4 sm:mt-6">
           <VeilleWidget alertes={(veilleAlertes || []) as VeilleAlerte[]} nonLuCount={veilleNonLu} />
         </div>
 
         {/* CA Annuel */}
-        <div className="mt-4 p-5 rounded-xl flex items-center justify-between"
-          style={{ backgroundColor: '#1e2d3d' }}>
+        <div
+          className="mt-4 p-5 rounded-[14px] flex items-center justify-between"
+          style={{ backgroundColor: '#1e2d3d' }}
+        >
           <div>
             <p className="text-sm font-medium" style={{ color: 'rgba(255,255,255,0.6)' }}>
               CA Réalisé — Année {now.getFullYear()}
             </p>
-            <p className="text-3xl font-bold text-white mt-1">
+            <p className="text-2xl sm:text-3xl font-bold text-white mt-1">
               {formatCurrency(caRealiseYear)}
             </p>
           </div>
@@ -207,6 +229,7 @@ export default async function DashboardPage() {
             </p>
           </div>
         </div>
+
       </div>
     </div>
   )

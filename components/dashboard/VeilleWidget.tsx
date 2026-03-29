@@ -42,8 +42,8 @@ const SENTIMENT_COLORS: Record<VeilleSentiment, string> = {
 export default function VeilleWidget({ alertes, nonLuCount }: VeilleWidgetProps) {
   return (
     <div
-      className="rounded-xl p-5"
-      style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3' }}
+      className="rounded-[14px] p-5"
+      style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3', boxShadow: '0 1px 4px rgba(30,45,61,0.06)' }}
     >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">

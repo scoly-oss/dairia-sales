@@ -150,8 +150,8 @@ export default function CatalogueClient({ initialServices }: Props) {
                 {catServices.map((service) => (
                   <div
                     key={service.id}
-                    className="p-4 rounded-xl"
-                    style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3' }}
+                    className="p-4 rounded-[14px]"
+                    style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3', boxShadow: '0 1px 4px rgba(30,45,61,0.06)' }}
                   >
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex items-center gap-2">
@@ -199,7 +199,7 @@ export default function CatalogueClient({ initialServices }: Props) {
           style={{ backgroundColor: 'rgba(0,0,0,0.4)' }}
           onClick={(e) => { if (e.target === e.currentTarget) setShowModal(false) }}
         >
-          <div className="rounded-2xl p-6 w-full max-w-md" style={{ backgroundColor: '#ffffff' }}>
+          <div className="rounded-[14px] p-6 w-full max-w-md" style={{ backgroundColor: '#ffffff', boxShadow: '0 8px 40px rgba(30,45,61,0.16)' }}>
             <h2 className="text-base font-semibold mb-5" style={{ color: '#1e2d3d' }}>
               {editingService ? 'Modifier la prestation' : 'Nouvelle prestation'}
             </h2>

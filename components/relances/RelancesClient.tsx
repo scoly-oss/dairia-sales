@@ -60,8 +60,12 @@ export default function RelancesClient({ initialTasks, prospects, profiles, curr
 
     return (
       <div
-        className="flex items-start gap-3 p-4 rounded-xl transition-all cursor-pointer"
-        style={{ backgroundColor: '#ffffff', border: `1px solid ${isOverdue ? '#fecaca' : '#e5e5e3'}` }}
+        className="flex items-start gap-3 p-4 rounded-[14px] transition-all cursor-pointer"
+        style={{
+          backgroundColor: '#ffffff',
+          border: `1px solid ${isOverdue ? '#fecaca' : '#e5e5e3'}`,
+          boxShadow: '0 1px 4px rgba(30,45,61,0.06)',
+        }}
         onClick={() => { setEditingTask(task); setShowModal(true) }}
       >
         <button

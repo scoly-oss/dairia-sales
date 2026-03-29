@@ -170,8 +170,8 @@ export default function ProspectDetail({ prospect: initial, currentUser, profile
           ].map(({ icon: Icon, label, value, isLink }) => (
             <div
               key={label}
-              className="p-4 rounded-xl"
-              style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3' }}
+              className="p-4 rounded-[14px]"
+              style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3', boxShadow: '0 1px 4px rgba(30,45,61,0.06)' }}
             >
               <p className="text-xs font-medium mb-1 flex items-center gap-1.5" style={{ color: '#6b7280' }}>
                 <Icon size={13} /> {label}
@@ -190,8 +190,8 @@ export default function ProspectDetail({ prospect: initial, currentUser, profile
           ))}
           {prospect.notes && (
             <div
-              className="p-4 rounded-xl md:col-span-2"
-              style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3' }}
+              className="p-4 rounded-[14px] md:col-span-2"
+              style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3', boxShadow: '0 1px 4px rgba(30,45,61,0.06)' }}
             >
               <p className="text-xs font-medium mb-2" style={{ color: '#6b7280' }}>Notes</p>
               <p className="text-sm whitespace-pre-wrap" style={{ color: '#1e2d3d' }}>{prospect.notes}</p>
@@ -205,8 +205,8 @@ export default function ProspectDetail({ prospect: initial, currentUser, profile
           {(prospect.contacts || []).map((contact) => (
             <div
               key={contact.id}
-              className="flex items-start gap-3 p-4 rounded-xl"
-              style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3' }}
+              className="flex items-start gap-3 p-4 rounded-[14px]"
+              style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3', boxShadow: '0 1px 4px rgba(30,45,61,0.06)' }}
             >
               <div
                 className="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-semibold flex-shrink-0"
@@ -253,7 +253,7 @@ export default function ProspectDetail({ prospect: initial, currentUser, profile
           ))}
 
           {showContactForm ? (
-            <form onSubmit={saveContact} className="p-4 rounded-xl space-y-3"
+            <form onSubmit={saveContact} className="p-4 rounded-[14px] space-y-3"
               style={{ backgroundColor: '#ffffff', border: '1px solid #e8842c' }}>
               <div className="grid grid-cols-2 gap-3">
                 <div>
@@ -313,7 +313,7 @@ export default function ProspectDetail({ prospect: initial, currentUser, profile
       {tab === 'Interactions' && (
         <div className="max-w-2xl space-y-3">
           {showInteractionForm ? (
-            <form onSubmit={saveInteraction} className="p-4 rounded-xl space-y-3"
+            <form onSubmit={saveInteraction} className="p-4 rounded-[14px] space-y-3"
               style={{ backgroundColor: '#ffffff', border: '1px solid #e8842c' }}>
               <div className="grid grid-cols-2 gap-3">
                 <div>
@@ -377,7 +377,7 @@ export default function ProspectDetail({ prospect: initial, currentUser, profile
                     <Icon size={14} />
                   </div>
                   <div
-                    className="flex-1 p-3 rounded-xl"
+                    className="flex-1 p-3 rounded-[14px]"
                     style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3' }}
                   >
                     <div className="flex items-center justify-between mb-1">
@@ -413,8 +413,8 @@ export default function ProspectDetail({ prospect: initial, currentUser, profile
           {(prospect.deals || []).map((deal) => (
             <div
               key={deal.id}
-              className="flex items-center gap-4 p-4 rounded-xl"
-              style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3' }}
+              className="flex items-center gap-4 p-4 rounded-[14px]"
+              style={{ backgroundColor: '#ffffff', border: '1px solid #e5e5e3', boxShadow: '0 1px 4px rgba(30,45,61,0.06)' }}
             >
               <div
                 className="w-3 h-3 rounded-full flex-shrink-0"
