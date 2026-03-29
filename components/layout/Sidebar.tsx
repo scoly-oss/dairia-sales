@@ -15,6 +15,7 @@ import {
   ChevronRight,
   Eye,
   X,
+  Brain,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
@@ -30,6 +31,7 @@ const navItems = [
   { href: '/catalogue', label: 'Catalogue', icon: BookOpen },
   { href: '/emails', label: 'Emails', icon: Mail },
   { href: '/veille', label: 'Veille', icon: Eye },
+  { href: '/intelligence', label: 'Intelligence IA', icon: Brain },
 ]
 
 export default function Sidebar() {

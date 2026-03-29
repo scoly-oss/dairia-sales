@@ -223,3 +223,86 @@ export interface DashboardStats {
   deals_en_cours: number
   top_deals: Deal[]
 }
+
+// ============================================================
+// Module Intelligence Client
+// ============================================================
+
+export type EffectifTranche = '-11' | '11-50' | '50-250' | '250+'
+export type OpportuniteType = 'services_manquants' | 'saisonnalite' | 'actu_juridique'
+export type OpportuniteStatut = 'nouvelle' | 'en_cours' | 'gagnee' | 'perdue' | 'ignoree'
+export type ActuSourceType = 'decret' | 'jurisprudence' | 'reforme' | 'ccn' | 'loi'
+
+export interface ClientIntelligence {
+  id: string
+  organisation_id: string | null
+  contact_id: string | null
+  organisation_nom: string
+  secteur: string | null
+  code_naf: string | null
+  idcc: string | null
+  idcc_libelle: string | null
+  effectif_tranche: EffectifTranche | null
+  services_souscrits: string[]
+  score_opportunite: number
+  created_at: string
+  updated_at: string
+  // joined
+  opportunites?: OpportuniteIA[]
+}
+
+export interface ActuImpact {
+  id: string
+  source_type: ActuSourceType
+  source_ref: string | null
+  titre: string
+  resume: string | null
+  clients_concernes_ids: string[]
+  services_concernes: string[]
+  created_at: string
+}
+
+export interface OpportuniteIA {
+  id: string
+  client_intelligence_id: string
+  organisation_id: string | null
+  organisation_nom: string | null
+  type: OpportuniteType
+  source: string | null
+  titre: string
+  description: string | null
+  service_propose: string | null
+  ca_estime: number
+  statut: OpportuniteStatut
+  actu_id: string | null
+  email_genere: string | null
+  proposition_generee: string | null
+  created_at: string
+  updated_at: string
+  // joined
+  client?: ClientIntelligence
+  actu?: ActuImpact
+}
+
+export interface PropositionEnvoyee {
+  id: string
+  opportunite_id: string
+  organisation_id: string | null
+  contact_id: string | null
+  canal: 'email' | 'courrier' | 'presentiel'
+  date_envoi: string | null
+  date_ouverture: string | null
+  resultat: 'envoye' | 'ouvert' | 'accepte' | 'refuse'
+  created_at: string
+}
+
+export interface IntelligenceDashboardStats {
+  total_clients: number
+  total_opportunites: number
+  opportunites_nouvelles: number
+  ca_potentiel: number
+  taux_conversion: number
+  top_clients: ClientIntelligence[]
+  alertes_actus: ActuImpact[]
+  opportunites_recentes: OpportuniteIA[]
+}
