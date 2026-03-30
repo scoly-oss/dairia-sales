@@ -2,8 +2,7 @@ import type { Config } from 'jest'
 
 const config: Config = {
   testEnvironment: 'jsdom',
-  // Note: setupFilesAfterFramework is loaded via jest.setup.ts
-  setupFilesAfterEach: undefined,
+  setupFilesAfterEnv: ['./jest.setup.ts'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
     '\\.(css|less|scss|sass)$': '<rootDir>/__tests__/__mocks__/styleMock.js',
